@@ -16,12 +16,18 @@ pr:
 variables:
   Codeql.Enabled: true
 
+resources:
+- repository: core
+  type: git
+  name: One/Azure-Core-CICD
+  ref: refs/heads/main
+
 jobs:
 - job: Windows
   pool:
     vmImage: 'windows-latest'
   steps:
-  - template: build/azure-pipelines/win32/build.yml
+  - template: .ci/steps/copilot/install.yml@core
 
 - job: Linux
   pool:
